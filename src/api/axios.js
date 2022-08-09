@@ -5,7 +5,7 @@ const instance = axios.create({
         params: {
                 api_key: "38c0c290fa6a0363c75a71c21338cd96",
                 language: "ko-KR",
-        }
+        },
 })
 
 export default instance;
