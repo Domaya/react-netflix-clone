@@ -13,7 +13,6 @@ function Banner() {
         //현재 상영중인 영화 정보를 가져오기(여러 영화)
         const request = await axios.get(requests.fetchNowPlaying);
 
-        console.log(request);
 
         // //여러 영화 중 하나의 ID를 가져오기
         const movieId = request.data.results[Math.floor(Math.random() * request.data.results.length)].id;
