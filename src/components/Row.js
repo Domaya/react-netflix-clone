@@ -13,7 +13,13 @@ function Row({title, fetchUrl, id, isLargeRow}) {
 
   useEffect(()=>{
     fetchMovieData();
+  
   }, [])
+  useEffect(()=>{
+    movies.map((movie) => {
+      console.log("영화", movie.poster_path)
+    })
+  }, )
 
 
   return (
@@ -25,16 +31,20 @@ function Row({title, fetchUrl, id, isLargeRow}) {
         </div>
 
         <div id={id} className="row__posters">
-          {movies.map((movie)=>{<>
-            <img
-              key={movie.id}
-              className={`row__poster ${isLargeRow && "row__posterLarge"}`}
-              src={`https://image.tmdb.org/t/p/original/movie.poster_path`}
-              loading="lazy"
-              alt = {movie.name}
-            />
-            <span>{movie.title}</span></>
-          })}
+          {movies.map((movie)=>
+            {
+              return <>
+              <img
+                key={movie.id}
+                className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+                src={`https://image.tmdb.org/t/p/original/${
+                  isLargeRow ? movie.poster_path : movie.backdrop_path
+                } `}
+                loading="lazy"
+                alt = {movie.name}
+              />
+              <span>{movie.title}</span></>
+            })}
         </div>
 
         <div className="slider__arrow-right">
