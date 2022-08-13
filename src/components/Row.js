@@ -8,6 +8,7 @@ function Row({title, fetchUrl, id, isLargeRow}) {
   const fetchMovieData = async() => {
     const request = await axios.get(fetchUrl)
     setMovies(request.data.results);
+    return request;
   }
 
 
@@ -19,12 +20,19 @@ function Row({title, fetchUrl, id, isLargeRow}) {
     <h2>{title}</h2>
     <div className="slider">
       <div className="slider__arrow-left">
-        <span className="arrow">{"<"}</span>
+      <span
+      className="arrow"
+      onClick={() => {
+        document.getElementById(id).scrollLeft -= window.innerWidth - 80;
+      }}
+    >
+      {"<"}
+    </span>
       </div>
 
       
       <div id={id} className="row__posters">
-       {movies.map((movie)=>
+       {movies?.map((movie)=>
           (
             <img
               key={movie.id}
@@ -35,11 +43,20 @@ function Row({title, fetchUrl, id, isLargeRow}) {
               loading="lazy"
               alt = {movie.name}
             />
-          ))}
+          )
+       )
+      }
       </div>
 
       <div className="slider__arrow-right">
-        <span className="arrow">{">"}</span>
+      <span
+      className="arrow"
+      onClick={() => {
+        document.getElementById(id).scrollLeft += window.innerWidth - 80;
+      }}
+    >
+      {">"}
+    </span>
       </div>
     </div>
   </section>
